@@ -1,4 +1,5 @@
 <?php
+
 use Drupal\Core\Template\Attribute;
 
 /**
@@ -42,6 +43,7 @@ function template_preprocess_textfield_copier(&$variables) {
 
   $variables['attributes']['class'][] = 'campaignist-textfield-copier';
   $variables['value'] = $element['#text'];
+  $variables['button_label'] =  $element['#copy_button_label'];
 
   $button_attributes = new Attribute();
   $button_attributes->setAttribute('class', ['textfield-copier-button']);
