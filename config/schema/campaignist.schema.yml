@@ -5,3 +5,9 @@ field.formatter.settings.text_copier:
     copy_button_label:
       type: string
       label: "Copy button label"
+    copied_button_label:
+      type: string
+      label: "Copied button label"
+    disable_time:
+      type: integer
+      label: "Button disable time"
