@@ -30,7 +30,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
    * {@inheritdoc}
    */
   public function getLabelDisplay() {
-    return 'above';
+    return 'hidden';
   }
 
   /**
@@ -52,6 +52,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#recipient' => $recipient,
       '#subject' => $subject,
       '#body' => $body,
+      '#button_label' => $settings['button_label'],
       '#attached' => [
         'library' => [
           'campaignist/send_mail'
@@ -92,6 +93,12 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#required' => TRUE,
     ];
 
+    $form['button_label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Send button label'),
+      '#required' => TRUE,
+    ];
+
     return $form;
   }
 
@@ -106,6 +113,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       'recipient_field' => NULL,
       'subject_field' => NULL,
       'body_field' => NULL,
+      'button_label' => $this->t('Send'),
     ];
 
     return $values;
