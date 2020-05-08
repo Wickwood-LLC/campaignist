@@ -1,7 +1,7 @@
 <form>
   <input name="recipient" type="hidden" value="{{ recipient }}" />
   <input name="subject" type="hidden" value="{{ subject }}" />
-  <input name="body" type="hidden" value="{{ body }}" />
+  <input name="body" type="hidden" value="{{ body | escape('html') }}" />
   <input class="campaignist-send-mail-button" type="button" value="Send" />
   <a download="message.eml" class="download-link" style="display: none;">Open email to send</a>
 <textarea name="mail" style="display: none;">
