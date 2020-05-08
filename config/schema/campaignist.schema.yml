@@ -1,0 +1,7 @@
+field.formatter.settings.text_copier:
+  type: mapping
+  label: 'Trimmed text display format settings'
+  mapping:
+    copy_button_label:
+      type: string
+      label: "Copy button label"

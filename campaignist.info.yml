@@ -1,0 +1,8 @@
+name: Campaignist
+type: module
+description: A module helping to arrange content for campaigns and helping to send through mails.
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - extra_field_plus:extra_field_plus

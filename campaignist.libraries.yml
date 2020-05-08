@@ -1,0 +1,6 @@
+send_mail: 
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js: { type: external, minified: true }
+    js/send-mail.js: {}
+  dependencies:
+    - core/jquery

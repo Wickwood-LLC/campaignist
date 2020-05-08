@@ -1,0 +1,59 @@
+<?php
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_theme().
+ */
+function campaignist_theme() {
+  return [
+    'textfield_copier' => [
+      'render element' => 'element',
+    ],
+    'mail_form' => [
+      'render element' => 'element',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK()
+ */
+function campaignist_theme_suggestions_textfield_copier(array $variables) {
+  $element = $variables['element'];
+
+  $suggestions = [];
+  $suggestions[] = 'textfield_copier__' . $element['#field_type'];
+  $suggestions[] = 'textfield_copier__' . $element['#field_name'];
+  $suggestions[] = 'textfield_copier__' . $element['#entity_type'] . '__' . $element['#bundle'];
+  $suggestions[] = 'textfield_copier__' . $element['#entity_type'] . '__' . $element['#field_name'];
+  $suggestions[] = 'textfield_copier__' . $element['#entity_type'] . '__' . $element['#field_name'] . '__' . $element['#bundle'];
+
+  return $suggestions;
+}
+
+/**
+ * Prepares variables for textfield_copier element templates.
+ */
+function template_preprocess_textfield_copier(&$variables) {
+  $element = $variables['element'];
+  if (!isset($variables['attributes']['class'])) {
+    $variables['attributes']['class'] = [];
+  }
+
+  $variables['attributes']['class'][] = 'campaignist-textfield-copier';
+  $variables['value'] = $element['#text'];
+
+  $button_attributes = new Attribute();
+  $button_attributes->setAttribute('class', ['textfield-copier-button']);
+  $button_attributes->setAttribute('data-regular-label', $element['#copy_button_label']);
+  $button_attributes->setAttribute('data-copied-label', $element['#copied_button_label']);
+  $button_attributes->setAttribute('data-disable-time', $element['#disable_time']);
+  $variables['button_attributes'] = $button_attributes;
+}
+
+function template_preprocess_mail_form(&$variables) {
+  $element = $variables['element'];
+  $variables['recipient'] = $element['#recipient'];
+  $variables['subject'] = $element['#subject'];
+  $variables['body'] = $element['#body'];
+}

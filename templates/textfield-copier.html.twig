@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a details element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - button_attributes: Attributes for button element.
+ *                      Please make sure not to disturb default attributes, or copying function may fail.
+ * - value: The value of the element.
+ *
+ * @see template_preprocess_textfield_copier()
+ *
+ * @ingroup themeable
+ */
+#}
+<div {{ attributes }}>
+  <div class="value">{{ value }}</div>
+  <button {{ button_attributes }}>{{ copy_button_label }}</button>
+</div>
