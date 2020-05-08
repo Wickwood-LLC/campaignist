@@ -42,12 +42,6 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     $entity_type = $entity->getEntityType()->id();
     $view_mode = $settings['display'];
 
-    // $view_builder = \Drupal::entityTypeManager()->getViewBuilder($entity_type);
-    // $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
-    // $build = $view_builder->view($entity, $view_mode);
-    // $subject = $build[$settings['subject_field']];
-    // $subject_field = $entity->{$settings['subject_field']};
-    // $body_field = $entity->{$settings['body_field']};
     $recipient = \Drupal::service('renderer')->render($entity->{$settings['recipient_field']}->view($view_mode)[0]);
     $subject = \Drupal::service('renderer')->render($entity->{$settings['subject_field']}->view($view_mode)[0]);
     $body = \Drupal::service('renderer')->render($entity->{$settings['body_field']}->view($view_mode)[0]);

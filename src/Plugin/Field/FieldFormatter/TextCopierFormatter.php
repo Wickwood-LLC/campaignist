@@ -5,15 +5,9 @@ namespace Drupal\campaignist\Plugin\Field\FieldFormatter;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
- * Plugin implementation of the 'text_trimmed' formatter.
- *
- * Note: This class also contains the implementations used by the
- * 'text_summary_or_trimmed' formatter.
- *
- * @see \Drupal\text\Field\Formatter\TextSummaryOrTrimmedFormatter
+ * Plugin implementation of the 'text_copier' formatter.
  *
  * @FieldFormatter(
  *   id = "text_copier",
@@ -89,18 +83,6 @@ class TextCopierFormatter extends FormatterBase {
 
     $field_config = $items->getDataDefinition();
 
-    // $render_as_summary = function (&$element) {
-    //   // Make sure any default #pre_render callbacks are set on the element,
-    //   // because text_pre_render_summary() must run last.
-    //   $element += \Drupal::service('element_info')->getInfo($element['#type']);
-    //   // Add the #pre_render callback that renders the text into a summary.
-    //   $element['#pre_render'][] = [TextTrimmedFormatter::class, 'preRenderSummary'];
-    //   // Pass on the trim length to the #pre_render callback via a property.
-    //   $element['#text_summary_trim_length'] = $this->getSetting('trim_length');
-    // };
-
-    // The ProcessedText element already handles cache context & tag bubbling.
-    // @see \Drupal\filter\Element\ProcessedText::preRenderText()
     foreach ($items as $delta => $item) {
       $elements[$delta] = [
         '#type' => 'textfield_copier',
@@ -120,20 +102,7 @@ class TextCopierFormatter extends FormatterBase {
         '#field_type' => $field_config->get('field_type'),
         '#field_name' => $field_config->get('field_name'),
       ];
-      // $elements[$delta] = [
-      //   '#type' => 'processed_text',
-      //   '#text' => NULL,
-      //   '#format' => $item->format,
-      //   '#langcode' => $item->getLangcode(),
-      // ];
 
-      // if ($this->getPluginId() == 'text_summary_or_trimmed' && !empty($item->summary)) {
-      //   $elements[$delta]['#text'] = $item->summary;
-      // }
-      // else {
-      //   $elements[$delta]['#text'] = $item->value;
-      //   $render_as_summary($elements[$delta]);
-      // }
       $elements[$delta]['#text']['#text'] = $item->value;
     }
 
