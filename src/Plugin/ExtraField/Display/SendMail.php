@@ -10,7 +10,7 @@ use Drupal\extra_field_plus\Plugin\ExtraFieldPlusDisplayFormattedBase;
  *
  * @ExtraFieldDisplay(
  *   id = "send_mail",
- *   label = @Translation("Send mail"),
+ *   label = @Translation("Send mail button"),
  *   bundles = {
  *     "node.*",
  *   },
