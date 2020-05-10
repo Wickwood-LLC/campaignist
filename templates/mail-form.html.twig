@@ -3,19 +3,4 @@
   <input name="subject" type="hidden" value="{{ subject }}" />
   <input name="body" type="hidden" value="{{ body | escape('html') }}" />
   <input class="campaignist-send-mail-button" type="button" value="Click to open email for sending" />
-  <a download="message.eml" class="download-link" style="display: none;">Click to send HTML email</a>
-<textarea name="mail" style="display: none;">
-To: User {{ recipient }}
-Subject: {{ subject }} 
-X-Unsent: 1
-Content-Type: text/html
-
-<html>
-<head>
-</head>
-<body>
-{{ body }}
-</body>
-</html>
-</textarea>
 </form>
