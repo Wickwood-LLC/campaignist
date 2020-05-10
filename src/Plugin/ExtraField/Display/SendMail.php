@@ -52,6 +52,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#recipient' => $recipient,
       '#subject' => $subject,
       '#body' => $body,
+      '#remove_line_breaks_in_body' => $settings['remove_line_breaks_in_body'],
       '#button_label' => $settings['button_label'],
       '#attached' => [
         'library' => [
@@ -99,6 +100,12 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#required' => TRUE,
     ];
 
+    $form['remove_line_breaks_in_body'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Remove HTML line breaks in body field'),
+      '#title' => $this->t('By default Drupal adds HTML line breaks to plain text content. Reverse that process to get true plain text content for body.'),
+    ];
+
     return $form;
   }
 
@@ -114,6 +121,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       'subject_field' => NULL,
       'body_field' => NULL,
       'button_label' => $this->t('Send'),
+      'remove_line_breaks_in_body' => FALSE,
     ];
 
     return $values;
