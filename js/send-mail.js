@@ -8,12 +8,6 @@
     attach: function(context, settings) {
       $('.campaignist-send-mail-button', context).click(function(){
         $form = $(this).closest("form");
-        let recipient = $form.find('input[name="recipient"]').val();
-        let subject = $form.find('input[name="subject"]').val().replace(/ /gm,"%20");
-        // .replace(/(\r\n|\n|\r)/gm,"%0D%0A")
-        let body = $form.find('input[name="body"]').val().replace(/ /gm,"%20");
-        let mail = $form.find('textarea[name="mail"]').val();
-        $form.attr('action', 'mailto:' + encodeURIComponent(recipient) + '?subject=' + encodeURIComponent(subject));
         $form.submit();
       });
 

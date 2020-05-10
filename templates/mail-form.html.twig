@@ -1,4 +1,4 @@
-<form>
+<form action="mailto:{{ recipient }}">
   <input name="recipient" type="hidden" value="{{ recipient }}" />
   <input name="subject" type="hidden" value="{{ subject }}" />
   <input name="body" type="hidden" value="{{ body | escape('html') }}" />
