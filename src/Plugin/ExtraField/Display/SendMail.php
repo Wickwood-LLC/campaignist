@@ -103,7 +103,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     $form['remove_line_breaks_in_body'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Remove HTML line breaks in body field'),
-      '#title' => $this->t('By default Drupal adds HTML line breaks to plain text content. Reverse that process to get true plain text content for body.'),
+      '#description' => $this->t('By default Drupal adds HTML line breaks to plain text content. Reverse that process to get true plain text content for body.'),
     ];
 
     return $form;
