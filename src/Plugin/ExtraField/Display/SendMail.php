@@ -73,24 +73,29 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#type' => 'textfield',
       '#title' => $this->t('Display'),
       '#required' => TRUE,
+      '#description' => $this->t('Display (view mode) of this content type to take values for preparing the email. Recommended to create a separate display for this purpose.'),
     ];
 
     $form['recipient_field'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Recipient field'),
       '#required' => TRUE,
+      '#description' => $this->t('Name of field that would be holding email addresses of recipient(s).'),
     ];
 
     $form['subject_field'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Subject field'),
       '#required' => TRUE,
+      '#description' => $this->t('Name of field that would be holding subject line for the email.'),
     ];
 
     $form['body_field'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Plain Text Body Field'),
       '#required' => TRUE,
+      '#description' => $this->t('Make sure to enter field name for a Plain, Long Text Field
+      . Please do not use HTML formatted field here since "mailto" link are not supported to work with HTML formatted email content.'),
     ];
 
     $form['button_label'] = [
