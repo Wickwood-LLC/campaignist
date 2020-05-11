@@ -56,6 +56,8 @@ function template_preprocess_textfield_copier(&$variables) {
 function template_preprocess_mail_form(&$variables) {
   $element = $variables['element'];
   $variables['recipient'] = $element['#recipient'];
+  $variables['cc'] = preg_replace('/\s+/', '', $element['#cc']);
+  $variables['bcc'] = preg_replace('/\s+/', '', $element['#bcc']);
   $variables['subject'] = $element['#subject'];
   $variables['body'] = str_replace(['<br>', '<br />'], '', $element['#body']);
   $variables['button_label'] = $element['#button_label'];

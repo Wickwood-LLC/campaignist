@@ -41,8 +41,19 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
 
     $entity_type = $entity->getEntityType()->id();
     $view_mode = $settings['display'];
+    $cc = NULL;
+    $bcc = NULL;
 
     $recipient = \Drupal::service('renderer')->render($entity->{$settings['recipient_field']}->view($view_mode)[0]);
+
+    if (!empty($settings['cc_field'])) {
+      $cc = \Drupal::service('renderer')->render($entity->{$settings['cc_field']}->view($view_mode)[0]);
+    }
+
+    if (!empty($settings['bcc_field'])) {
+      $bcc = \Drupal::service('renderer')->render($entity->{$settings['bcc_field']}->view($view_mode)[0]);
+    }
+
     $subject = \Drupal::service('renderer')->render($entity->{$settings['subject_field']}->view($view_mode)[0]);
     $body = \Drupal::service('renderer')->render($entity->{$settings['body_field']}->view($view_mode)[0]);
 
@@ -50,6 +61,8 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     $element = [
       '#theme' => 'mail_form',
       '#recipient' => $recipient,
+      '#cc' => $cc,
+      '#bcc' => $bcc,
       '#subject' => $subject,
       '#body' => $body,
       '#button_label' => $settings['button_label'],
@@ -81,6 +94,20 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       '#title' => $this->t('Recipient field'),
       '#required' => TRUE,
       '#description' => $this->t('Name of field that would be holding email addresses of recipient(s).'),
+    ];
+
+    $form['cc_field'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Carbon copy (CC) field'),
+      '#required' => FALSE,
+      '#description' => $this->t('Name of field that would be holding email addresses of recipient(s) intended to receive copy of the email.'),
+    ];
+
+    $form['bcc_field'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Blind carbon copy (CC) field'),
+      '#required' => FALSE,
+      '#description' => $this->t('Name of field that would be holding email addresses of recipient(s) intended to receive copy of the email, but without notifying other recipients.'),
     ];
 
     $form['subject_field'] = [
@@ -116,6 +143,8 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     $values += [
       'display' => NULL,
       'recipient_field' => NULL,
+      'cc_field' => NULL,
+      'bcc_field' => NULL,
       'subject_field' => NULL,
       'body_field' => NULL,
       'button_label' => $this->t('Send'),
