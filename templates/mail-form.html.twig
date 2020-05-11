@@ -1,7 +1,7 @@
-<form action="mailto:{{ recipient }}">
-  {% if cc %}<input name="cc" type="hidden" value="{{ cc }}" />{% endif %}
-  {% if bcc %}<input name="bcc" type="hidden" value="{{ bcc }}" />{% endif %}
-  <input name="subject" type="hidden" value="{{ subject }}" />
+<form action="mailto:{{ recipient | escape('html') }}">
+  {% if cc %}<input name="cc" type="hidden" value="{{ cc | escape('html') }}" />{% endif %}
+  {% if bcc %}<input name="bcc" type="hidden" value="{{ bcc | escape('html') }}" />{% endif %}
+  <input name="subject" type="hidden" value="{{ subject | escape('html') }}" />
   <input name="body" type="hidden" value="{{ body | escape('html') }}" />
   <input class="campaignist-send-mail-button" type="button" value="Click to open email for sending" />
 </form>

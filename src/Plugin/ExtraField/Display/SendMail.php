@@ -39,24 +39,21 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
   public function viewElements(ContentEntityInterface $entity) {
     $settings = $this->getSettings();
 
-    $entity_type = $entity->getEntityType()->id();
-    $view_mode = $settings['display'];
     $cc = NULL;
     $bcc = NULL;
 
-    $recipient = \Drupal::service('renderer')->render($entity->{$settings['recipient_field']}->view($view_mode)[0]);
+    $recipient = static::getSingleFieldValueItem($entity, $settings['recipient_field']);
 
     if (!empty($settings['cc_field'])) {
-      $cc = \Drupal::service('renderer')->render($entity->{$settings['cc_field']}->view($view_mode)[0]);
+      $cc = static::getSingleFieldValueItem($entity, $settings['cc_field']);
     }
 
     if (!empty($settings['bcc_field'])) {
-      $bcc = \Drupal::service('renderer')->render($entity->{$settings['bcc_field']}->view($view_mode)[0]);
+      $bcc = static::getSingleFieldValueItem($entity, $settings['bcc_field']);
     }
 
-    $subject = \Drupal::service('renderer')->render($entity->{$settings['subject_field']}->view($view_mode)[0]);
-    $body = \Drupal::service('renderer')->render($entity->{$settings['body_field']}->view($view_mode)[0]);
-
+    $subject = static::getSingleFieldValueItem($entity, $settings['subject_field']);
+    $body = static::getSingleFieldValueItem($entity, $settings['body_field']);
 
     $element = [
       '#theme' => 'mail_form',
@@ -81,13 +78,6 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
    */
   public function settingsForm() {
     $form = parent::settingsForm();
-
-    $form['display'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Display'),
-      '#required' => TRUE,
-      '#description' => $this->t('Display (view mode) of this content type to take values for preparing the email. Recommended to create a separate display for this purpose.'),
-    ];
 
     $form['recipient_field'] = [
       '#type' => 'textfield',
@@ -141,7 +131,6 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     $values = parent::defaultFormValues();
 
     $values += [
-      'display' => NULL,
       'recipient_field' => NULL,
       'cc_field' => NULL,
       'bcc_field' => NULL,
@@ -151,6 +140,15 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
     ];
 
     return $values;
+  }
+
+  public static function getSingleFieldValueItem($entity, $field_name) {
+    $value = NULL;
+    $field_items = $entity->get($field_name)->getValue();
+    if (isset($field_items[0]['value'])) {
+      $value = $field_items[0]['value'];
+    }
+    return $value;
   }
 
 }
