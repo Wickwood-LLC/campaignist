@@ -57,9 +57,6 @@ function template_preprocess_mail_form(&$variables) {
   $element = $variables['element'];
   $variables['recipient'] = $element['#recipient'];
   $variables['subject'] = $element['#subject'];
-  $variables['body'] = $element['#body'];
-  if ($element['#remove_line_breaks_in_body']) {
-    $variables['body'] = str_replace(['<br>', '<br />'], '', $variables['body']);
-  }
+  $variables['body'] = str_replace(['<br>', '<br />'], '', $element['#body']);
   $variables['button_label'] = $element['#button_label'];
 }
