@@ -89,7 +89,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
 
     $form['body_field'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Body field'),
+      '#title' => $this->t('Plain Text Body Field'),
       '#required' => TRUE,
     ];
 
