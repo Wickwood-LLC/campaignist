@@ -117,7 +117,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
 
     $form['button_label'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Send button label'),
+      '#title' => $this->t('Send link label'),
       '#required' => TRUE,
     ];
 
