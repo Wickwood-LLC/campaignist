@@ -12,9 +12,18 @@
       });
 
       var clipboard = new ClipboardJS('.campaignist-textfield-copier .textfield-copier-button', {
-        target: function(trigger) {
+        text: function(trigger) {
           let $wrapper = $(trigger).closest(".campaignist-textfield-copier");
-          return $('.value', $wrapper)[0];
+          let output = [];
+          $('.value', $wrapper).each(function(){
+            if (this.hasAttribute('data-value')) {
+              output.push($(this).attr('data-value'));
+            }
+            else {
+              output.push($(this).text());
+            }
+          });
+          return output.join($(trigger).attr('data-glue'));
         }
       });
 

@@ -18,7 +18,7 @@ class TextfieldCopier extends RenderElement {
     $class = get_class($this);
     return [
       '#theme' => 'textfield_copier',
-      '#text' => '',
+      '#values' => [],
       '#format' => NULL,
       '#filter_types_to_skip' => [],
       '#langcode' => '',

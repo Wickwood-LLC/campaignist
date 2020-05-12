@@ -38,18 +38,17 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
    */
   public function viewElements(ContentEntityInterface $entity) {
     $settings = $this->getSettings();
-
     $cc = NULL;
     $bcc = NULL;
 
-    $recipient = static::getSingleFieldValueItem($entity, $settings['recipient_field']);
+    $recipient = static::getFieldValueItems($entity, $settings['recipient_field'], ';');
 
     if (!empty($settings['cc_field'])) {
-      $cc = static::getSingleFieldValueItem($entity, $settings['cc_field']);
+      $cc = static::getFieldValueItems($entity, $settings['cc_field'], ';');
     }
 
     if (!empty($settings['bcc_field'])) {
-      $bcc = static::getSingleFieldValueItem($entity, $settings['bcc_field']);
+      $bcc = static::getFieldValueItems($entity, $settings['bcc_field'], ';');
     }
 
     $subject = static::getSingleFieldValueItem($entity, $settings['subject_field']);
@@ -149,6 +148,15 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
       $value = $field_items[0]['value'];
     }
     return $value;
+  }
+
+  public static function getFieldValueItems($entity, $field_name, $glue) {
+    $values = NULL;
+    $field_items = $entity->get($field_name)->getValue();
+    foreach ($field_items as $field_item) {
+      $values[] = $field_item['value'];
+    }
+    return implode($glue, $values);
   }
 
 }
