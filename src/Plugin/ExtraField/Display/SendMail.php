@@ -143,19 +143,24 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
 
   public static function getSingleFieldValueItem($entity, $field_name) {
     $value = NULL;
-    $field_items = $entity->get($field_name)->getValue();
-    if (isset($field_items[0]['value'])) {
-      $value = $field_items[0]['value'];
+    if ($entity->hasField($field_name)) {
+      $field_items = $entity->get($field_name)->getValue();
+      if (isset($field_items[0]['value'])) {
+        $value = $field_items[0]['value'];
+      }
     }
     return $value;
   }
 
   public static function getFieldValueItems($entity, $field_name, $glue) {
-    $values = NULL;
-    $field_items = $entity->get($field_name)->getValue();
-    foreach ($field_items as $field_item) {
-      $values[] = $field_item['value'];
+    $values = [];
+    if ($entity->hasField($field_name)) {
+      $field_items = $entity->get($field_name)->getValue();
+      foreach ($field_items as $field_item) {
+        $values[] = $field_item['value'];
+      }
     }
+
     return implode($glue, $values);
   }
 
