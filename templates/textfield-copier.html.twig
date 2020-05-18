@@ -16,7 +16,7 @@
 #}
 <div {{ attributes }}>
   {% for value in values %}
-    <div {{ value.attributes }}>{{ value }}</div>
+    <div {{ value.attributes }}>{{ value.value }}</div>
   {% endfor %}
   <button {{ button_attributes }}>{{ button_label }}</button>
 </div>

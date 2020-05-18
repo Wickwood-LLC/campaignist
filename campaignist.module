@@ -42,9 +42,12 @@ function template_preprocess_textfield_copier(&$variables) {
   }
 
   $variables['attributes']['class'][] = 'campaignist-textfield-copier';
-  $variables['values'] = $element['#values'];
-  foreach ($variables['values'] as &$value) {
-    $value['attributes'] = $value['#attributes'];
+  $variables['values'] = [];
+  foreach ($element['#values'] as $value) {
+    $variables['values'][] = [
+      'value' => $value,
+      'attributes' => $value['#attributes']
+    ];
   }
   $variables['button_label'] =  $element['#copy_button_label'];
 
