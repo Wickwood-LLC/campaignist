@@ -2,14 +2,14 @@
 
 namespace Drupal\campaignist\Element;
 
-use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Element\RenderElementBase;
 
 /**
  * Provides a processed text render element.
  *
  * @RenderElement("textfield_copier")
  */
-class TextfieldCopier extends RenderElement {
+class TextfieldCopier extends RenderElementBase {
 
   /**
    * {@inheritdoc}

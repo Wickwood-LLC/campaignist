@@ -37,7 +37,7 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
    * {@inheritdoc}
    */
   public function viewElements(ContentEntityInterface $entity) {
-    $settings = $this->getSettings();
+    $settings = $this->getEntityExtraFieldSettings();
     $cc = NULL;
     $bcc = NULL;
 
@@ -75,8 +75,8 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsForm() {
-    $form = parent::settingsForm();
+  public function settingsForm(): array {
+    $form = static::extraFieldSettingsForm();
 
     $form['recipient_field'] = [
       '#type' => 'textfield',
@@ -126,8 +126,8 @@ class SendMail extends ExtraFieldPlusDisplayFormattedBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultFormValues() {
-    $values = parent::defaultFormValues();
+  public function defaultFormValues(): array {
+    $values = static::defaultExtraFieldSettings();
 
     $values += [
       'recipient_field' => NULL,
